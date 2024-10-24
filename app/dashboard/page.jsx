@@ -1,7 +1,7 @@
 import React from "react";
 
 const DashboardPage = () => {
-  return <div>Dashboard Page</div>;
+  return <footer>Dashboard kPage</footer>;
 };
 
 export default DashboardPage;
