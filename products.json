@@ -1,0 +1,227 @@
+[
+  {
+    "category": ["Accessories", "Fashion"],
+    "description": "A stylish and versatile accessory.",
+    "culture": ["Japanese", "Modern"],
+    "images": ["/images/1.png"],
+    "price": 29.99,
+    "stock": 100,
+    "featured": true
+  },
+  {
+    "category": ["Home Decor"],
+    "description": "Handcrafted decor piece to enhance any room.",
+    "culture": ["Scandinavian"],
+    "images": ["/images/2.png"],
+    "price": 45.99,
+    "stock": 50,
+    "featured": false
+  },
+  {
+    "category": ["Storage", "Home Decor"],
+    "description": "A beautiful woven basket for storage or decoration.",
+    "culture": ["African"],
+    "images": ["/images/3.png"],
+    "price": 25.99,
+    "stock": 200,
+    "featured": true
+  },
+  {
+    "category": ["Kitchen"],
+    "description": "Durable and aesthetically pleasing kitchenware.",
+    "culture": ["Mediterranean"],
+    "images": ["/images/4.png"],
+    "price": 34.99,
+    "stock": 75,
+    "featured": false
+  },
+  {
+    "category": ["Accessories", "Jewelry"],
+    "description": "Elegant jewelry piece crafted from sustainable materials.",
+    "culture": ["Native American", "Bohemian"],
+    "images": ["/images/5.png"],
+    "price": 59.99,
+    "stock": 120,
+    "featured": true
+  },
+  {
+    "category": ["Fashion"],
+    "description": "High-quality fabric and unique design.",
+    "culture": ["Indian", "Traditional"],
+    "images": ["/images/6.png"],
+    "price": 49.99,
+    "stock": 80,
+    "featured": false
+  },
+  {
+    "category": ["Home Decor", "Art"],
+    "description": "Hand-painted art piece inspired by cultural motifs.",
+    "culture": ["Mexican"],
+    "images": ["/images/7.png"],
+    "price": 79.99,
+    "stock": 30,
+    "featured": true
+  },
+  {
+    "category": ["Accessories", "Bags"],
+    "description": "Stylish bag made from natural fibers.",
+    "culture": ["African"],
+    "images": ["/images/8.png"],
+    "price": 39.99,
+    "stock": 150,
+    "featured": false
+  },
+  {
+    "category": ["Fashion", "Accessories"],
+    "description": "Comfortable scarf with a unique pattern.",
+    "culture": ["Scottish"],
+    "images": ["/images/9.png"],
+    "price": 19.99,
+    "stock": 200,
+    "featured": true
+  },
+  {
+    "category": ["Jewelry"],
+    "description": "Beautiful bracelet made with intricate designs.",
+    "culture": ["Egyptian"],
+    "images": ["/images/10.png"],
+    "price": 89.99,
+    "stock": 40,
+    "featured": false
+  },
+  {
+    "category": ["Accessories", "Footwear"],
+    "description": "Handmade sandals for style and comfort.",
+    "culture": ["Indian"],
+    "images": ["/images/11.png"],
+    "price": 44.99,
+    "stock": 120,
+    "featured": true
+  },
+  {
+    "category": ["Home Decor"],
+    "description": "Elegant vase for floral arrangements.",
+    "culture": ["European", "Vintage"],
+    "images": ["/images/12.png"],
+    "price": 34.99,
+    "stock": 150,
+    "featured": true
+  },
+  {
+    "category": ["Kitchen"],
+    "description": "Authentic wooden serving platter.",
+    "culture": ["Mediterranean"],
+    "images": ["/images/13.png"],
+    "price": 29.99,
+    "stock": 90,
+    "featured": false
+  },
+  {
+    "category": ["Fashion", "Clothing"],
+    "description": "Comfortable and stylish top with unique patterns.",
+    "culture": ["Native American"],
+    "images": ["/images/14.png"],
+    "price": 59.99,
+    "stock": 60,
+    "featured": true
+  },
+  {
+    "category": ["Storage"],
+    "description": "Durable storage basket, perfect for organizing.",
+    "culture": ["Scandinavian"],
+    "images": ["/images/15.png"],
+    "price": 19.99,
+    "stock": 80,
+    "featured": false
+  },
+  {
+    "category": ["Jewelry"],
+    "description": "Handcrafted necklace with cultural designs.",
+    "culture": ["Turkish"],
+    "images": ["/images/16.png"],
+    "price": 49.99,
+    "stock": 70,
+    "featured": true
+  },
+  {
+    "category": ["Fashion", "Clothing"],
+    "description": "Traditional patterned shawl.",
+    "culture": ["Indian"],
+    "images": ["/images/17.png"],
+    "price": 39.99,
+    "stock": 100,
+    "featured": true
+  },
+  {
+    "category": ["Accessories", "Footwear"],
+    "description": "High-quality leather boots with cultural accents.",
+    "culture": ["Western"],
+    "images": ["/images/18.png"],
+    "price": 120.99,
+    "stock": 50,
+    "featured": false
+  },
+  {
+    "category": ["Art"],
+    "description": "Print inspired by traditional art styles.",
+    "culture": ["Japanese"],
+    "images": ["/images/19.png"],
+    "price": 24.99,
+    "stock": 90,
+    "featured": true
+  },
+  {
+    "category": ["Kitchen"],
+    "description": "Hand-painted ceramic mug.",
+    "culture": ["Mexican"],
+    "images": ["/images/20.png"],
+    "price": 15.99,
+    "stock": 200,
+    "featured": false
+  },
+  {
+    "category": ["Storage"],
+    "description": "Natural woven basket, perfect for storing goods.",
+    "culture": ["African"],
+    "images": ["/images/21.png"],
+    "price": 20.99,
+    "stock": 300,
+    "featured": true
+  },
+  {
+    "category": ["Accessories", "Jewelry"],
+    "description": "Intricate ring crafted by skilled artisans.",
+    "culture": ["Indian"],
+    "images": ["/images/22.png"],
+    "price": 29.99,
+    "stock": 100,
+    "featured": false
+  },
+  {
+    "category": ["Home Decor", "Art"],
+    "description": "Traditional wall art print.",
+    "culture": ["Native American"],
+    "images": ["/images/23.png"],
+    "price": 49.99,
+    "stock": 60,
+    "featured": true
+  },
+  {
+    "category": ["Accessories", "Jewelry"],
+    "description": "Earrings with cultural designs.",
+    "culture": ["Egyptian"],
+    "images": ["/images/24.png"],
+    "price": 34.99,
+    "stock": 50,
+    "featured": false
+  },
+  {
+    "category": ["Fashion", "Clothing"],
+    "description": "Comfortable, stylish dress for any occasion.",
+    "culture": ["Greek"],
+    "images": ["/images/25.png"],
+    "price": 69.99,
+    "stock": 80,
+    "featured": true
+  }
+]

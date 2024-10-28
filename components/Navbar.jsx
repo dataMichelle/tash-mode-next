@@ -58,7 +58,7 @@ const Navbar = () => {
           {/* Desktop Menu Links */}
           <div className="hidden md:flex md:flex-1 justify-center space-x-4">
             <Link
-              href="/products"
+              href="/tashmode"
               className={`${
                 pathname === "/products"
                   ? "bg-gray-900 text-white"
@@ -68,7 +68,7 @@ const Navbar = () => {
               Shop Tash Mode
             </Link>
             <Link
-              href="/products"
+              href="/category"
               className={`${
                 pathname === "/products"
                   ? "bg-gray-900 text-white"
@@ -78,7 +78,7 @@ const Navbar = () => {
               Shop by Category
             </Link>
             <Link
-              href="/products"
+              href="/culture"
               className={`${
                 pathname === "/products"
                   ? "bg-gray-900 text-white"
@@ -149,7 +149,7 @@ const Navbar = () => {
         <div id="mobile-menu" className="md:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
             <Link
-              href="/products"
+              href="/tashmode"
               className={`${
                 pathname === "/products"
                   ? "bg-gray-900 text-white"
@@ -159,7 +159,7 @@ const Navbar = () => {
               Shop Tash Mode
             </Link>
             <Link
-              href="/products"
+              href="/category"
               className={`${
                 pathname === "/products"
                   ? "bg-gray-900 text-white"
@@ -169,7 +169,7 @@ const Navbar = () => {
               Shop by Category
             </Link>
             <Link
-              href="/products"
+              href="/culture"
               className={`${
                 pathname === "/products"
                   ? "bg-gray-900 text-white"
