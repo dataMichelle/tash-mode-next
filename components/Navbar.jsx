@@ -45,11 +45,11 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link className="flex flex-shrink-0 items-center" href="/">
+          {/* Centered Logo */}
+          <div className="flex-1 flex justify-center md:justify-start">
+            <Link className="flex items-center" href="/">
               <Image className="h-10 w-auto" src={logo} alt="Tash Mode Logo" />
-              <span className="hidden md:block text-black text-2xl font-bold ml-2">
+              <span className="text-black text-2xl font-bold ml-2">
                 Tash Mode
               </span>
             </Link>
@@ -89,7 +89,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Right side menu (Logged Out */}
+          {/* Right side menu (Logged Out or Logged In) */}
           <div className="flex items-center space-x-4">
             {!isLoggedIn && (
               <button className="hidden md:flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
@@ -178,6 +178,8 @@ const Navbar = () => {
             >
               Shop by Culture
             </Link>
+
+            {/* Login Button (if not logged in) */}
             {!isLoggedIn && (
               <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
                 <FaGoogle className="mr-2" />
