@@ -5,10 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const pathname = usePathname();
 
   return (
     <nav className="border-b">
@@ -51,75 +55,91 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Centered Menu Links */}
+          {/* Desktop Menu Links */}
           <div className="hidden md:flex md:flex-1 justify-center space-x-4">
             <Link
               href="/products"
-              className="hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+              className={`${
+                pathname === "/products"
+                  ? "bg-gray-900 text-white"
+                  : "hover:bg-gray-900 hover:text-white"
+              } rounded-md px-3 py-2`}
             >
               Shop Tash Mode
             </Link>
             <Link
               href="/products"
-              className="hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+              className={`${
+                pathname === "/products"
+                  ? "bg-gray-900 text-white"
+                  : "hover:bg-gray-900 hover:text-white"
+              } rounded-md px-3 py-2`}
             >
               Shop by Category
             </Link>
             <Link
               href="/products"
-              className="hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+              className={`${
+                pathname === "/products"
+                  ? "bg-gray-900 text-white"
+                  : "hover:bg-gray-900 hover:text-white"
+              } rounded-md px-3 py-2`}
             >
               Shop by Culture
             </Link>
           </div>
 
-          {/* Right side menu */}
+          {/* Right side menu (Logged Out */}
           <div className="flex items-center space-x-4">
-            <button className="hidden md:flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
-              <FaGoogle className="mr-2" />
-              <span>Login or Register</span>
-            </button>
+            {!isLoggedIn && (
+              <button className="hidden md:flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
+                <FaGoogle className="mr-2" />
+                <span>Login or Register</span>
+              </button>
+            )}
 
             {/* Profile dropdown button */}
-            <div className="relative">
-              <button
-                type="button"
-                className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                aria-expanded={isProfileMenuOpen ? "true" : "false"}
-                aria-haspopup="true"
-                onClick={() => setIsProfileMenuOpen((prev) => !prev)}
-              >
-                <span className="sr-only">Open user menu</span>
-                <Image
-                  className="h-8 w-8 rounded-full"
-                  src={profileImg}
-                  alt="User Profile"
-                  width={40}
-                  height={40}
-                />
-              </button>
-              {isProfileMenuOpen && (
-                <div
-                  className="absolute right-0 w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
-                  role="menu"
-                  aria-orientation="vertical"
+            {isLoggedIn && (
+              <div className="relative">
+                <button
+                  type="button"
+                  className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  aria-expanded={isProfileMenuOpen ? "true" : "false"}
+                  aria-haspopup="true"
+                  onClick={() => setIsProfileMenuOpen((prev) => !prev)}
                 >
-                  <Link
-                    href="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
+                  <span className="sr-only">Open user menu</span>
+                  <Image
+                    className="h-8 w-8 rounded-full"
+                    src={profileImg}
+                    alt="User Profile"
+                    width={40}
+                    height={40}
+                  />
+                </button>
+                {isProfileMenuOpen && (
+                  <div
+                    className="absolute right-0 w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
+                    role="menu"
+                    aria-orientation="vertical"
                   >
-                    Your Profile
-                  </Link>
-                  <button
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                    >
+                      Your Profile
+                    </Link>
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -130,26 +150,40 @@ const Navbar = () => {
           <div className="space-y-1 px-2 pb-3 pt-2">
             <Link
               href="/products"
-              className="block hover:text-white rounded-md px-3 py-2 hover:bg-gray-700"
+              className={`${
+                pathname === "/products"
+                  ? "bg-gray-900 text-white"
+                  : "hover:bg-gray-900 hover:text-white"
+              } block rounded-md px-3 py-2`}
             >
               Shop Tash Mode
             </Link>
             <Link
               href="/products"
-              className="block hover:text-white rounded-md px-3 py-2 hover:bg-gray-700"
+              className={`${
+                pathname === "/products"
+                  ? "bg-gray-900 text-white"
+                  : "hover:bg-gray-900 hover:text-white"
+              } block rounded-md px-3 py-2`}
             >
               Shop by Category
             </Link>
             <Link
               href="/products"
-              className="block hover:text-white rounded-md px-3 py-2 hover:bg-gray-700"
+              className={`${
+                pathname === "/products"
+                  ? "bg-gray-900 text-white"
+                  : "hover:bg-gray-900 hover:text-white"
+              } block rounded-md px-3 py-2`}
             >
               Shop by Culture
             </Link>
-            <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
-              <FaGoogle className="mr-2" />
-              <span>Login or Register</span>
-            </button>
+            {!isLoggedIn && (
+              <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
+                <FaGoogle className="mr-2" />
+                <span>Login or Register</span>
+              </button>
+            )}
           </div>
         </div>
       )}
