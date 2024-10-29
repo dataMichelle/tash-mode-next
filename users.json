@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Michelle Salazar",
+    "email": "michellebsalazar@gmail.com",
+    "image": "https://lh3.googleusercontent.com/a/ACg8ocKlBT-Xbc2YRT0AhVP1EymXZ6w7_X…",
+    "emailVerified": null
+  },
+  {
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "image": "https://example.com/profiles/johndoe.jpg",
+    "emailVerified": null
+  },
+  {
+    "name": "Jane Smith",
+    "email": "janesmith@example.com",
+    "image": "https://example.com/profiles/janesmith.jpg",
+    "emailVerified": "2024-08-15T12:00:00Z"
+  },
+  {
+    "name": "Carlos Ramirez",
+    "email": "carlosramirez@example.com",
+    "image": "https://example.com/profiles/carlosramirez.jpg",
+    "emailVerified": null
+  },
+  {
+    "name": "Emily Chen",
+    "email": "emilychen@example.com",
+    "image": "https://example.com/profiles/emilychen.jpg",
+    "emailVerified": "2023-11-05T15:30:00Z"
+  }
+]

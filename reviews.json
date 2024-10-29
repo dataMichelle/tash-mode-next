@@ -1,0 +1,42 @@
+[
+  {
+    "productId": { "$oid": "672003ffa612b4e283cee052" },
+    "userId": { "$oid": "6720c7ada612b4e283cee06f" },
+    "rating": 5,
+    "comment": "Amazing quality! Exceeded my expectations.",
+    "createdAt": { "$date": "2024-08-20T12:00:00Z" },
+    "updatedAt": { "$date": "2024-08-20T12:00:00Z" }
+  },
+  {
+    "productId": { "$oid": "672003ffa612b4e283cee055" },
+    "userId": { "$oid": "6720c7ada612b4e283cee070" },
+    "rating": 4,
+    "comment": "Good quality, but a bit pricey.",
+    "createdAt": { "$date": "2024-08-21T08:30:00Z" },
+    "updatedAt": { "$date": "2024-08-21T08:30:00Z" }
+  },
+  {
+    "productId": { "$oid": "672003ffa612b4e283cee055" },
+    "userId": { "$oid": "6720c7ada612b4e283cee071" },
+    "rating": 3,
+    "comment": "Decent product, but it arrived late.",
+    "createdAt": { "$date": "2024-08-22T14:45:00Z" },
+    "updatedAt": { "$date": "2024-08-22T14:45:00Z" }
+  },
+  {
+    "productId": { "$oid": "672003ffa612b4e283cee058" },
+    "userId": { "$oid": "6720c7ada612b4e283cee073" },
+    "rating": 4,
+    "comment": "Beautiful craftsmanship and fast delivery.",
+    "createdAt": { "$date": "2024-08-23T10:15:00Z" },
+    "updatedAt": { "$date": "2024-08-23T10:15:00Z" }
+  },
+  {
+    "productId": { "$oid": "672003ffa612b4e283cee058" },
+    "userId": { "$oid": "6720c7ada612b4e283cee072" },
+    "rating": 5,
+    "comment": "Absolutely love it! Highly recommended.",
+    "createdAt": { "$date": "2024-08-24T16:00:00Z" },
+    "updatedAt": { "$date": "2024-08-24T16:00:00Z" }
+  }
+]
