@@ -3,8 +3,10 @@ import Image from "next/image";
 import { useState } from "react";
 import Reviews from "@/components/Reviews";
 import ReviewForm from "@/components/ReviewForm";
+import { useCart } from "@/context/CartContext"; // Adjust the path as necessary
 
 const ProductDetailCard = ({ product, reviews: initialReviews, userId }) => {
+  const { addToCart } = useCart(); // Get addToCart from context
   const [reviews, setReviews] = useState(initialReviews);
   const [quantity, setQuantity] = useState(1);
 
@@ -13,6 +15,16 @@ const ProductDetailCard = ({ product, reviews: initialReviews, userId }) => {
   };
 
   const handleAddToCart = () => {
+    const itemToAdd = {
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      quantity,
+      images: product.images,
+      // Add any other product details you need
+    };
+
+    addToCart(itemToAdd); // Add item to the cart using context
     console.log(`Added ${quantity} of ${product.name} to cart.`);
   };
 

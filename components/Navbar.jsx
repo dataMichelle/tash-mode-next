@@ -3,15 +3,17 @@ import logo from "@/assets/images/Logo_Black_no_text.png";
 import profileImg from "@/assets/images/profile.png";
 import Image from "next/image";
 import Link from "next/link";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useCart } from "@/context/CartContext"; // Adjust import path if needed
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
+  const { cartItems } = useCart();
   const pathname = usePathname();
 
   return (
@@ -89,7 +91,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Right side menu (Logged Out or Logged In) */}
+          {/* Right side menu */}
           <div className="flex items-center space-x-4">
             {!isLoggedIn && (
               <button className="hidden md:flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
@@ -100,7 +102,7 @@ const Navbar = () => {
 
             {/* Profile dropdown button */}
             {isLoggedIn && (
-              <div className="relative">
+              <div className="relative flex items-center space-x-4">
                 <button
                   type="button"
                   className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -138,6 +140,18 @@ const Navbar = () => {
                     </button>
                   </div>
                 )}
+                {/* Cart Icon */}
+                <Link
+                  href="/cart"
+                  className="relative text-gray-600 hover:text-black"
+                >
+                  <FaShoppingCart className="h-6 w-6" />
+                  {cartItems.length > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+                      {cartItems.length}
+                    </span>
+                  )}
+                </Link>
               </div>
             )}
           </div>
