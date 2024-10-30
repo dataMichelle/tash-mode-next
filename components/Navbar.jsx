@@ -4,17 +4,31 @@ import profileImg from "@/assets/images/profile.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGoogle, FaShoppingCart } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/context/CartContext"; // Adjust import path if needed
+import { useCart } from "@/context/CartContext";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [providers, setProviders] = useState(null);
 
   const { cartItems } = useCart();
   const pathname = usePathname();
+
+  useEffect(() => {
+    const setUpProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    };
+    setUpProviders();
+  }, []);
+
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen(false);
+  };
 
   return (
     <nav className="border-b">
@@ -93,15 +107,18 @@ const Navbar = () => {
 
           {/* Right side menu */}
           <div className="flex items-center space-x-4">
-            {!isLoggedIn && (
-              <button className="hidden md:flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
+            {!session && providers && (
+              <button
+                className="hidden md:flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2"
+                onClick={() => signIn(providers.google.id)}
+              >
                 <FaGoogle className="mr-2" />
                 <span>Login or Register</span>
               </button>
             )}
 
             {/* Profile dropdown button */}
-            {isLoggedIn && (
+            {session && (
               <div className="relative flex items-center space-x-4">
                 <button
                   type="button"
@@ -113,7 +130,7 @@ const Navbar = () => {
                   <span className="sr-only">Open user menu</span>
                   <Image
                     className="h-8 w-8 rounded-full"
-                    src={profileImg}
+                    src={session.user.image || profileImg}
                     alt="User Profile"
                     width={40}
                     height={40}
@@ -129,12 +146,14 @@ const Navbar = () => {
                       href="/profile"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
+                      onClick={handleProfileClick}
                     >
                       Your Profile
                     </Link>
                     <button
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
+                      onClick={() => signOut()}
                     >
                       Sign Out
                     </button>
@@ -194,8 +213,11 @@ const Navbar = () => {
             </Link>
 
             {/* Login Button (if not logged in) */}
-            {!isLoggedIn && (
-              <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2">
+            {!session && providers && (
+              <button
+                className="flex items-center text-white bg-gray-700 hover:bg-gray-900 rounded-md px-3 py-2"
+                onClick={() => signIn(providers.google.id)}
+              >
                 <FaGoogle className="mr-2" />
                 <span>Login or Register</span>
               </button>

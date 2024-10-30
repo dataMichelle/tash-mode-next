@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { CartProvider } from "@/context/CartContext";
-import StripeProvider from "@/components/StripeProvider";
+import AuthProvider from "@/components/AuthProvider";
 
 export const metadata = {
   title: "Tash Mode Shopping",
@@ -12,16 +12,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <StripeProvider>
+    <AuthProvider>
+      <html lang="en">
+        <body>
           <CartProvider>
             <Navbar />
             <main>{children}</main>
             <Footer />
           </CartProvider>
-        </StripeProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
