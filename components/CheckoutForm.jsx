@@ -113,283 +113,205 @@ const CheckoutForm = () => {
     <PayPalScriptProvider
       options={{ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
     >
-      <CheckoutFormContent
-        address={address}
-        handleChange={handleChange}
-        total={total}
-        tax={tax}
-        shipping={shipping}
-        createOrder={createOrder}
-        onApprove={onApprove}
-        onError={onError}
-        onCancel={onCancel}
-        message={message}
-      />
-    </PayPalScriptProvider>
-  );
-};
-
-const CheckoutFormContent = ({
-  address,
-  handleChange,
-  total,
-  tax,
-  shipping,
-  createOrder,
-  onApprove,
-  onError,
-  onCancel,
-  message,
-}) => {
-  const [{ isPending, isRejected }, dispatch] = usePayPalScriptReducer();
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-
-  useEffect(() => {
-    dispatch({
-      type: "resetOptions",
-      value: {
-        "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-        currency: "USD",
-        intent: "capture",
-      },
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!isPending && !isRejected) {
-      setScriptLoaded(true);
-    }
-  }, [isPending, isRejected]);
-
-  if (isRejected) {
-    return <div>Error loading PayPal options. Please try again later.</div>;
-  }
-
-  return (
-    <div>
-      <div className="mt-6">
-        <h2 className="text-lg font-bold">Order Summary</h2>
-        <div className="flex justify-between mt-2">
-          <span>Subtotal:</span>
-          <span>${(total - tax - shipping).toFixed(2)}</span>
+      <div className="bg-white shadow-md rounded-lg p-6">
+        <h2 className="text-2xl font-bold mb-4">Express Checkout</h2>
+        <div className="flex">
+          <div className="w-2/5 pr-6">
+            <h2 className="text-lg font-bold">Order Summary</h2>
+            <div className="flex justify-between mt-2">
+              <span>Subtotal:</span>
+              <span>${(total - tax - shipping).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between mt-2">
+              <span>Tax:</span>
+              <span>${tax.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between mt-2">
+              <span>Shipping:</span>
+              <span>${shipping.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between mt-2 font-bold">
+              <span>Total:</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+          </div>
+          <div className="w-3/5 pl-6">
+            <div className="flex flex-col space-y-4">
+              <PayPalButtons
+                key="paypal"
+                style={{ layout: "vertical", height: 45 }}
+                fundingSource="paypal"
+                createOrder={createOrder}
+                onApprove={onApprove}
+                onError={onError}
+                onCancel={onCancel}
+              />
+              <PayPalButtons
+                key="paylater"
+                style={{ layout: "vertical", height: 45 }}
+                fundingSource="paylater"
+                createOrder={createOrder}
+                onApprove={onApprove}
+                onError={onError}
+                onCancel={onCancel}
+              />
+              <PayPalButtons
+                key="card"
+                style={{
+                  layout: "vertical",
+                  height: 45,
+                  color: "black",
+                }}
+                fundingSource={FUNDING.CARD}
+                createOrder={createOrder}
+                onApprove={onApprove}
+                onError={onError}
+                onCancel={onCancel}
+              />
+            </div>
+          </div>
         </div>
-        <div className="flex justify-between mt-2">
-          <span>Tax:</span>
-          <span>${tax.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between mt-2">
-          <span>Shipping:</span>
-          <span>${shipping.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between mt-2 font-bold">
-          <span>Total:</span>
-          <span>${total.toFixed(2)}</span>
-        </div>
+        {message && <p className="text-red-500 mt-4">{message}</p>}
+        <h2 className="text-2xl font-bold mt-8 mb-4">Contact Information</h2>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={address.email}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              name="newsOffers"
+              className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            />
+            <label className="ml-2 block text-sm text-gray-900">
+              Email me with news and offers
+            </label>
+          </div>
+          <h2 className="text-2xl font-bold mt-8 mb-4">Delivery Address</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                First Name
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                value={address.firstName}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Last Name
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                value={address.lastName}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Address 1
+            </label>
+            <input
+              type="text"
+              name="address1"
+              value={address.address1}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Address 2 (optional)
+            </label>
+            <input
+              type="text"
+              name="address2"
+              value={address.address2}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                City
+              </label>
+              <input
+                type="text"
+                name="city"
+                value={address.city}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                State
+              </label>
+              <input
+                type="text"
+                name="state"
+                value={address.state}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                ZIP
+              </label>
+              <input
+                type="text"
+                name="zip"
+                value={address.zip}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Country
+              </label>
+              <input
+                type="text"
+                name="country"
+                value={address.country}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Phone
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={address.phone}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        </form>
       </div>
-      {isPending && <div>Loading PayPal options...</div>}
-      {typeof window !== "undefined" && scriptLoaded ? (
-        <>
-          <h2 className="text-2xl font-bold mt-8 mb-4">Express Checkout</h2>
-          <div className="flex flex-col space-y-4 w-1/2 mx-auto">
-            <PayPalButtons
-              key="paypal"
-              style={{ layout: "vertical", height: 45 }}
-              fundingSource="paypal"
-              createOrder={createOrder}
-              onApprove={onApprove}
-              onError={onError}
-              onCancel={onCancel}
-            />
-            <PayPalButtons
-              key="paylater"
-              style={{ layout: "vertical", height: 45 }}
-              fundingSource="paylater"
-              createOrder={createOrder}
-              onApprove={onApprove}
-              onError={onError}
-              onCancel={onCancel}
-            />
-            <PayPalButtons
-              key="card"
-              style={{
-                layout: "vertical",
-                height: 45,
-                color: "black",
-                label: "credit",
-              }}
-              fundingSource={FUNDING.CARD}
-              createOrder={createOrder}
-              onApprove={onApprove}
-              onError={onError}
-              onCancel={onCancel}
-            />
-          </div>
-        </>
-      ) : (
-        <div>Loading PayPal script...</div>
-      )}
-      {message && <p className="text-red-500 mt-4">{message}</p>}
-      <h2 className="text-2xl font-bold mt-8 mb-4">Contact Information</h2>
-      <form className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={address.email}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="newsOffers"
-            className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          />
-          <label className="ml-2 block text-sm text-gray-900">
-            Email me with news and offers
-          </label>
-        </div>
-        <h2 className="text-2xl font-bold mt-8 mb-4">Delivery Address</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              First Name
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              value={address.firstName}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Last Name
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              value={address.lastName}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Address 1
-          </label>
-          <input
-            type="text"
-            name="address1"
-            value={address.address1}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Address 2 (optional)
-          </label>
-          <input
-            type="text"
-            name="address2"
-            value={address.address2}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              City
-            </label>
-            <input
-              type="text"
-              name="city"
-              value={address.city}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              State
-            </label>
-            <input
-              type="text"
-              name="state"
-              value={address.state}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              ZIP / Postal Code
-            </label>
-            <input
-              type="text"
-              name="zip"
-              value={address.zip}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Country
-            </label>
-            <input
-              type="text"
-              name="country"
-              value={address.country}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Phone
-          </label>
-          <input
-            type="text"
-            name="phone"
-            value={address.phone}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="saveInfo"
-            className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          />
-          <label className="ml-2 block text-sm text-gray-900">
-            Save this information for next time
-          </label>
-        </div>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="textOffers"
-            className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          />
-          <label className="ml-2 block text-sm text-gray-900">
-            Text me with news and offers
-          </label>
-        </div>
-      </form>
-    </div>
+    </PayPalScriptProvider>
   );
 };
 
