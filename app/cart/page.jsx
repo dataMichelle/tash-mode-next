@@ -1,55 +1,26 @@
-// app/cart/page.jsx
 "use client";
-
-import { useState } from "react";
-import Cart from "@/components/Cart"; // Your existing Cart component
-import ShippingInformation from "@/components/ShippingInformation";
-import BillingInformation from "@/components/BillingInformation";
+import Cart from "@/components/Cart"; // Adjust the import path if needed
+import { useRouter } from "next/navigation";
 
 const CartPage = () => {
-  const [activeTab, setActiveTab] = useState("shipping");
-  const [shippingData, setShippingData] = useState({});
-  const [billingData, setBillingData] = useState({});
+  const router = useRouter();
 
-  const handleShippingDataChange = (data) => {
-    setShippingData(data);
-  };
-
-  const handleBillingDataChange = (data) => {
-    setBillingData(data);
+  const handleCheckout = () => {
+    router.push("/checkout"); // Navigate to the checkout page
   };
 
   return (
-    <div className="flex space-x-8">
-      <div className="w-1/3">
-        <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
+    <div className="container mx-auto p-4 flex space-x-4">
+      <div className="w-2/3">
         <Cart />
       </div>
-      <div className="w-2/3">
-        <div className="tabs">
-          <button
-            onClick={() => setActiveTab("shipping")}
-            className={`tab ${activeTab === "shipping" ? "active" : ""}`}
-          >
-            Shipping Information
-          </button>
-          <button
-            onClick={() => setActiveTab("billing")}
-            className={`tab ${activeTab === "billing" ? "active" : ""}`}
-          >
-            Billing Information
-          </button>
-        </div>
-        {activeTab === "shipping" ? (
-          <ShippingInformation
-            onShippingDataChange={handleShippingDataChange}
-          />
-        ) : (
-          <BillingInformation
-            onBillingDataChange={handleBillingDataChange}
-            isSameAsShipping={shippingData}
-          />
-        )}
+      <div className="w-1/3 flex flex-col justify-center items-center">
+        <button
+          onClick={handleCheckout}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+        >
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );

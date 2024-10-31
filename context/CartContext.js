@@ -42,6 +42,12 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
   };
 
+  const updateQuantity = (id, quantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) => (item._id === id ? { ...item, quantity } : item))
+    );
+  };
+
   // Update local storage whenever cartItems changes
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -50,7 +56,15 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        setCartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
